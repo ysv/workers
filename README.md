@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Kafka Listeners
 
-Things you may want to cover:
+##### Description
+TODO: Add description.
 
-* Ruby version
+##### Configuration
+Check config/consumers.yml for consumers configuration.
 
-* System dependencies
+##### Run
+Run Example Consumer  
+```sh
+KAFKA_CONSUMER_NAME=example bundle exec rake kafka_listener
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##### Producer
+You can find Kafka Producer example [here](/doc/kafka-producer-example.md)
