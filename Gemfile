@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'rails', '~> 5.2.1'
+gem 'ruby-kafka', '~> 0.7.4'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'memoist', '~> 0.16.0'
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExampleConsumer
-  def call(*args)
-    Rails.logger.info { "I'm Example listener" }
+  def call(message)
+    Rails.logger.info { "Example listener received #{message}" }
   end
 end

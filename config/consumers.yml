@@ -1,0 +1,9 @@
+example:
+  kafka: <%= ENV.fetch('KAFKA_URL', '127.0.0.1:9092') %>
+  group_id: example-group
+  topics:
+    - example-topic-1
+    - example-topic-2
+  keys:
+    - example-key-1
+    - example-key-2
