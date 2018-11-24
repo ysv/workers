@@ -15,6 +15,7 @@ class KafkaListener
   end
 
   def call
+    binding.pry
     consumer
     listen
   end
@@ -30,7 +31,7 @@ class KafkaListener
   end
 
   def consumer
-    "consumers/#{@consumer_name}".camelize.constantize
+    "#{@consumer_name}_consumer".camelize.constantize
   end
   memoize :consumer
 end
