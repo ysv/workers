@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'rails', '~> 5.2.1'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+gem 'memoist', '~> 0.16.0'
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'
