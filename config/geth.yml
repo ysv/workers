@@ -1,0 +1,5 @@
+rpc_endpoint: http://35.195.174.216:8545
+contract_address: '0x26a8bd2ef381b836ef63fdf04f3d2d5a080dadce'
+issuer:
+  address: '0x31aF280CdeE35c1Ae3D3D2cd12eCECd508404CaF'
+  secret: penny

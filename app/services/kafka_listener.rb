@@ -51,7 +51,7 @@ class KafkaListener
     Rails.logger.info do
       "Received message\n#{message.as_json}\n"
     end
-    if message.key.in?(configuration[:keys])
+    if configuration[:keys].blank? || message.key.in?(configuration[:keys])
       consumer.call(JSON.parse(message.value))
     else
       Rails.logger.warn do
