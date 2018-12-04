@@ -40,11 +40,13 @@ spec:
         imagePullPolicy: {{ . }}
         {{- end }}
         env:
-        - name: DB_URL
-          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306/{{ .Values.database.name }}"
-        - name: DB_USER
+        - name: DATABASE_URL
+          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306"
+        - name: DATABASE_NAME
+          value: {{ .Values.database.name }}
+        - name: DATABASE_USER
           value: {{ .Values.database.user }}
-        - name: DB_PASSWORD
+        - name: DATABASE_PASS
           valueFrom:
             secretKeyRef:
               name: {{ .Values.database.credentials }}
@@ -98,11 +100,13 @@ spec:
         imagePullPolicy: {{ . }}
         {{- end }}
         env:
-        - name: DB_URL
-          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306/{{ .Values.database.name }}"
-        - name: DB_USER
+        - name: DATABASE_URL
+          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306"
+        - name: DATABASE_NAME
+          value: {{ .Values.database.name }}
+        - name: DATABASE_USER
           value: {{ .Values.database.user }}
-        - name: DB_PASSWORD
+        - name: DATABASE_PASS
           valueFrom:
             secretKeyRef:
               name: {{ .Values.database.credentials }}
