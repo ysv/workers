@@ -1,0 +1,115 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "penny-auction-workers.fullname" . }}-lot
+  labels:
+    app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    {{- with .Values.labels }}
+{{ toYaml . | indent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  {{- with .Values.strategy }}
+  strategy:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- with .Values.labels }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml .| indent 8 }}
+      {{- end }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        {{- with .Values.image.pullPolicy }}          
+        imagePullPolicy: {{ . }}
+        {{- end }}
+        env:
+        - name: DB_URL
+          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306/{{ .Values.database.name }}"
+        - name: DB_USER
+          value: {{ .Values.database.user }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.credentials }}
+              key: mysql-password
+        - name: KAFKA_URL
+          value: "http://penny-auction-kafka-kafk:9092"
+        - name: KAFKA_CONSUMER_NAME
+          value: "lot_created bundle exec rake kafka_listener"
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "penny-auction-workers.fullname" . }}-bid
+  labels:
+    app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    {{- with .Values.labels }}
+{{ toYaml . | indent 4 }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  {{- with .Values.strategy }}
+  strategy:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- with .Values.labels }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml .| indent 8 }}
+      {{- end }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        {{- with .Values.image.pullPolicy }}          
+        imagePullPolicy: {{ . }}
+        {{- end }}
+        env:
+        - name: DB_URL
+          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306/{{ .Values.database.name }}"
+        - name: DB_USER
+          value: {{ .Values.database.user }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.database.credentials }}
+              key: mysql-password
+        - name: KAFKA_URL
+          value: "http://penny-auction-kafka-kafk:9092"
+        - name: KAFKA_CONSUMER_NAME
+          value: "bid_created bundle exec rake kafka_listener"
+        resources:
+{{ toYaml .Values.resources | indent 10 }}

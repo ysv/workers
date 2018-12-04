@@ -1,0 +1,16 @@
+fullnameOverride: penny-auction-workers
+
+image:
+  repository: javatechnologies/penny-auction-workers
+  tag: 0.1.0
+
+database:
+  name: app_db
+  user: app
+  credentials: service-db-secret
+
+resources:
+  requests:
+    memory: 256Mi
+  limits:
+    memory: 1024Mi
