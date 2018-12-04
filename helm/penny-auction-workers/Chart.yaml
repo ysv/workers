@@ -1,4 +1,4 @@
-name: penny-auction-workers
+name: penny-auction-worker
 description: Penny Auction Smart-contract workers
 apiVersion: v1
 appVersion: develop

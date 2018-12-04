@@ -1,9 +1,9 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "penny-auction-workers.fullname" . }}-lot
+  name: {{ template "penny-auction-worker.fullname" . }}-lot
   labels:
-    app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+    app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-lot
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
@@ -18,12 +18,12 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+      app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-lot
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-lot
+        app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-lot
         app.kubernetes.io/instance: {{ .Release.Name }}
         {{- with .Values.labels }}
 {{ toYaml . | indent 8 }}
@@ -41,7 +41,7 @@ spec:
         {{- end }}
         env:
         - name: DATABASE_URL
-          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306"
+          value: "jdbc:mysql://penny-auction-worker-db-mysql:3306"
         - name: DATABASE_NAME
           value: {{ .Values.database.name }}
         - name: DATABASE_USER
@@ -61,9 +61,9 @@ spec:
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "penny-auction-workers.fullname" . }}-bid
+  name: {{ template "penny-auction-worker.fullname" . }}-bid
   labels:
-    app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+    app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-bid
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
@@ -78,12 +78,12 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+      app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-bid
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "penny-auction-workers.name" . }}-bid
+        app.kubernetes.io/name: {{ template "penny-auction-worker.name" . }}-bid
         app.kubernetes.io/instance: {{ .Release.Name }}
         {{- with .Values.labels }}
 {{ toYaml . | indent 8 }}
@@ -101,7 +101,7 @@ spec:
         {{- end }}
         env:
         - name: DATABASE_URL
-          value: "jdbc:mysql://penny-auction-workers-db-mysql:3306"
+          value: "jdbc:mysql://penny-auction-worker-db-mysql:3306"
         - name: DATABASE_NAME
           value: {{ .Values.database.name }}
         - name: DATABASE_USER

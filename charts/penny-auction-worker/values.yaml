@@ -1,0 +1,45 @@
+# Default values for penny-auction-worker.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: gcr.io/penny-auction-project/workers
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+app:
+  vars:
+    DATABASE_URL: "penny-auction-service-db-mysql:3306"
+    DATABASE_NAME: "app_db"
+    DATABASE_PASS: "pass2mysql"
+    DATABASE_USER: "app"
+    KAFKA_URL: "penny-auction-kafka-kafk:9092"
+    KAFKA_CONSUMER_NAME: "lot_created"
+    WORKER_NAME: "kafka_listener"

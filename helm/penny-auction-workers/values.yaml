@@ -1,7 +1,7 @@
-fullnameOverride: penny-auction-workers
+fullnameOverride: penny-auction-worker
 
 image:
-  repository: javatechnologies/penny-auction-workers
+  repository: javatechnologies/penny-auction-worker
   tag: 0.1.0
 
 database:
