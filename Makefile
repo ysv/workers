@@ -5,4 +5,4 @@ push:
 	gcloud docker -- push gcr.io/penny-auction-project/workers
 
 deploy:
-	helm install charts/penny-auction-worker --name penny-auction-worker
+	helm install charts/penny-auction-worker --name penny-auction-worker-lot-created

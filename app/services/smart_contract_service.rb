@@ -22,7 +22,6 @@ class SmartContractService
   #)
   #
   def add_new_lot(initial_price:, bid_increment:)
-    binding.pry
     data = abi_encode(
       'addNewLot(uint256,uint256)',
       '0x' + initial_price.to_i.to_s(16),

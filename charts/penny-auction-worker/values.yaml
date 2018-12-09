@@ -43,3 +43,4 @@ app:
     KAFKA_URL: "penny-auction-kafka-kafk:9092"
     KAFKA_CONSUMER_NAME: "lot_created"
     WORKER_NAME: "kafka_listener"
+    RAILS_ENV: "development"

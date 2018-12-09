@@ -8,7 +8,7 @@ require 'active_support/all'
 kafka = Kafka.new([ENV.fetch('KAFKA_URL','0.0.0.0:9092')])
 message_id = 0
 topic = 'lot_creator-topic'
-lot_id = 16
+lot_id = 1
 
 loop do
   text = {
@@ -34,7 +34,7 @@ require 'active_support/all'
 kafka = Kafka.new([ENV.fetch('KAFKA_URL','0.0.0.0:9092')])
 message_id = 0
 topic = 'bid_creator-topic'
-bid_id = 16
+bid_id = 11
 
 loop do
   text = {
