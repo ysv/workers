@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: gcr.io/penny-auction-project/workers
-  tag: latest
+  tag: 0.0.1
   pullPolicy: Always
 
 nameOverride: ""
@@ -36,7 +36,7 @@ affinity: {}
 
 app:
   vars:
-    DATABASE_URL: "penny-auction-service-db-mysql:3306"
+    DATABASE_URL: "mysql2://penny-auction-service-db-mysql:3306"
     DATABASE_NAME: "app_db"
     DATABASE_PASS: "pass2mysql"
     DATABASE_USER: "app"

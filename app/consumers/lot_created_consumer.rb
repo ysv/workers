@@ -3,6 +3,7 @@
 class LotCreatedConsumer
   def call(message)
     lot_obj = find_lot(message)
+    return unless lot_obj
 
     geth_service = SmartContractService.new
     geth_service.add_new_lot(

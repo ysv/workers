@@ -10,7 +10,7 @@ default: &default
 
 development:
   <<: *default
-  database: auction
+  database: <%= ENV.fetch('DATABASE_NAME', 'auction') %>
 
 test:
   <<: *default
